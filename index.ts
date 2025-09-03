@@ -59,40 +59,16 @@ app.get("/blogs/:id", (req, res) => {
   res.json(singlePost);
 });
 
-app.post("/blogs", (req, res) => {
-  blogs.push({
-    id: blogs.length + 1,
-    title: `New Blog ${blogs.length + 1}`,
+const startServer = async () => {
+  // try {
+  await connectToDatabase();
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
   });
+  // } catch (error) {
+  //   console.error("❌ Failed to start server:", error);
+  //   process.exit(1);
+  // }
+};
 
-  res.json(blogs);
-  //   res.send("Create a new blog");
-});
-
-app.put("/blogs/:id", (req, res) => {
-  const { id } = req.params;
-  res.send(`Update blog with ID: ${id}`);
-});
-
-app.delete("/blogs/:id", (req, res) => {
-  const { id } = req.params;
-  res.send(`Delete blog with ID: ${id}`);
-});
-
-
-
-
-
-// routing in express
-
-//GET,  POST,  PUT, PATCH, DELETE AND MORE
-
-//  knowing what is routing in express
-
-//  testing in express
-
-// console.log(app.get);
-
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+startServer();
