@@ -13,6 +13,7 @@
   * Verify with `node -v` and `npm -v`.
 * Hello World in Node.js (`hello.js`).
 
+<<<<<<< Updated upstream
 ```js
 console.log("Hello, Node.js 🚀");
 ```
@@ -276,3 +277,10 @@ You can now design, code, and run a small backend API.
 ---
 
 👉 Next Step: Would you like me to **expand this even more into a workbook style** with **daily coding challenges and quiz questions** so you can test yourself after each day?
+=======
+ 
+# CRUD Operations in MongoDB using Mongoose ( Create, Read, Update, Delete )
+
+
+
+>>>>>>> Stashed changes

@@ -1,6 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
 
+import connectToDatabase from "./src/config/connect-db";
+// import connectMongo from "./src/db/mongo";
+
 dotenv.config();
 
 const app = express();
@@ -12,6 +15,7 @@ console.log(PORT);
 // app.get("/", (req, res) => {
 //   console.log("GET / request received");
 
+<<<<<<< Updated upstream
 //   res.send("Hello, World!");
 // });
 
@@ -41,6 +45,14 @@ let blogs = [
 app.get("/blogs", (req, res) => {
   res.json(blogs);
 });
+=======
+// app.use((req, res, next) => {
+//   req.body.applicationName = "Blogging Platform";
+
+//   console.log("Time:", Date.now());
+//   next();
+// });
+>>>>>>> Stashed changes
 
 app.get("/blogs/:id", (req, res) => {
   const { id } = req.params;
@@ -56,6 +68,7 @@ app.get("/blogs/:id", (req, res) => {
   res.json(singlePost);
 });
 
+<<<<<<< Updated upstream
 app.post("/blogs", (req, res) => {
   blogs.push({
     id: blogs.length + 1,
@@ -93,3 +106,18 @@ app.delete("/blogs/:id", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+=======
+const startServer = async () => {
+  // try {
+    await connectToDatabase();
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on http://localhost:${PORT}`);
+    });
+  // } catch (error) {
+  //   console.error("❌ Failed to start server:", error);
+  //   process.exit(1);
+  // }
+};
+
+startServer();
+>>>>>>> Stashed changes
