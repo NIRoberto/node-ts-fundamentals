@@ -5,6 +5,9 @@ import morgan from "morgan";
 import blogRouter from "./src/routes/blogsRoutes";
 import usersRouters from "./src/routes/userRoute";
 
+import connectToDatabase from "./src/config/connect-db";
+// import connectMongo from "./src/db/mongo";
+
 dotenv.config();
 
 const app = express();
@@ -15,12 +18,12 @@ app.use(express.json());
 
 app.use(morgan("dev"));
 
-app.use((req, res, next) => {
-  req.body.applicationName = "Blogging Platform";
+// app.use((req, res, next) => {
+//   req.body.applicationName = "Blogging Platform";
 
-  console.log("Time:", Date.now());
-  next();
-});
+//   console.log("Time:", Date.now());
+//   next();
+// });
 
 app.use("/blogs", blogRouter);
 
@@ -32,7 +35,16 @@ app.get("/", (req, res) => {
   res.send("Hello, World!");
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+const startServer = async () => {
+  try {
+    await connectToDatabase();
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error("❌ Failed to start server:", error);
+    process.exit(1);
+  }
+};
 
+startServer();
